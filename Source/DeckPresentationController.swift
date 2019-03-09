@@ -24,7 +24,9 @@ final class DeckPresentationController: UIPresentationController, UIGestureRecog
     
     // MARK: - Private variables
     
-    private var isSwipeToDismissGestureEnabled = true
+    private var isSwipeToDismissGestureEnabled: Bool {
+        return self.transitioningDelegate?.isSwipeToDismissEnabled ?? false
+    }
     private var pan: UIPanGestureRecognizer?
     private var scrollViewUpdater: ScrollViewUpdater?
     
@@ -51,15 +53,12 @@ final class DeckPresentationController: UIPresentationController, UIGestureRecog
     
     convenience init(presentedViewController: UIViewController,
                      presenting presentingViewController: UIViewController?,
-                     isSwipeToDismissGestureEnabled: Bool,
                      presentAnimation: (() -> ())? = nil,
                      presentCompletion: ((Bool) ->())? = nil,
                      dismissAnimation: (() -> ())? = nil,
                      dismissCompletion: ((Bool) -> ())? = nil) {
         self.init(presentedViewController: presentedViewController,
                   presenting: presentingViewController)
-        
-        self.isSwipeToDismissGestureEnabled = isSwipeToDismissGestureEnabled
         self.presentAnimation = presentAnimation
         self.presentCompletion = presentCompletion
         self.dismissAnimation = dismissAnimation

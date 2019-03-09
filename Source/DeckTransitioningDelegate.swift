@@ -23,10 +23,10 @@ import UIKit
 /// present(modal, animated: true, completion: nil)
 /// ```
 public final class DeckTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
-    
+
+    public var isSwipeToDismissEnabled: Bool
     // MARK: - Private variables
-    
-    private let isSwipeToDismissEnabled: Bool
+
     private let presentDuration: TimeInterval?
     private let presentAnimation: (() -> ())?
     private let presentCompletion: ((Bool) -> ())?
@@ -112,7 +112,6 @@ public final class DeckTransitioningDelegate: NSObject, UIViewControllerTransiti
         let presentationController = DeckPresentationController(
             presentedViewController: presented,
             presenting: presenting,
-            isSwipeToDismissGestureEnabled: isSwipeToDismissEnabled,
             presentAnimation: presentAnimation,
             presentCompletion: presentCompletion,
             dismissAnimation: dismissAnimation,
